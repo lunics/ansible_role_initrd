@@ -23,5 +23,4 @@ _mkinitcpio_config:
     # gzip, bzip2, lzma, xz, lzo
   COMPRESSION_OPTIONS: []   # additional options for the compressor
 
-mkinitcpio_force_create: false
 mkinitcpio_disable_fallback_preset: false

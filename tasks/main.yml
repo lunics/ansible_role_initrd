@@ -12,23 +12,17 @@
 
   - import_tasks: preset.yml
 
-  # - name: shell > force creation of initial ramdisk
-  #   shell:
-  #     cmd: /bin/true
-  #   notify: "(handlers) shell > generate initial RAM disk"
-  #   when: mkinitcpio_force_create
-
   - name: meta > run handlers before modifying initramfs.img permissions
     meta: flush_handlers
 
   ## KO: can't be apply
-  - name: file > restrict access permissions to initramfs
-    file:
-      path: "/boot/{{ item }}"
-      mode: "0600"
-    with_items:
-      - initramfs-linux.img
-      - initramfs-linux-fallback.img
+  # - name: file > restrict access permissions to initramfs
+  #   file:
+  #     path: "/boot/{{ item }}"
+  #     mode: "0600"
+  #   with_items:
+  #     - initramfs-linux.img
+  #     - initramfs-linux-fallback.img
 
   become_user: root
   tags: initrd
