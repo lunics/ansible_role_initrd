@@ -1,0 +1,16 @@
+- block:
+  - name: find > all /etc/mkinitcpio.d/*.preset files
+    find:
+      paths:    /etc/mkinitcpio.d/
+      patterns: "*.preset"
+    register: r_preset_files
+
+  - name: lineinfile > disable fallback preset
+    lineinfile:
+      path:   "{{ item.path }}"
+      regexp: "^PRESETS="
+      line:   "PRESETS=(\"default\")"
+    loop: "{{ r_preset_files.files | default([]) }}"
+    notify: "handlers | shell > generate initial RAM disk"
+
+  when: mkinitcpio_disable_fallback_preset

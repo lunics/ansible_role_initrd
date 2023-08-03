@@ -1,0 +1,6 @@
+- name: handlers | shell > generate initial RAM disk
+  shell:
+    cmd: /usr/bin/mkinitcpio --preset linux
+  register:     r_mkinitcpio
+  failed_when:  r_mkinitcpio.rc != 0
+  changed_when: true

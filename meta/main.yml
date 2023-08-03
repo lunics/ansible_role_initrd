@@ -1,0 +1,18 @@
+galaxy_info:
+  role_name:    initrd
+  author:       lunics
+  namespace:    lunics
+  description:  A role to setup and generate the initial RAM disk
+  license:      GPL-3.0
+  company:      none
+  min_ansible_version: 2.1
+  platforms:
+    - name: Archlinux
+      versions:
+        - all
+  galaxy_tags:
+    - mkinitcpio
+    - initrd
+    - initfs
+
+dependencies: []

@@ -1,0 +1,27 @@
+initrd_mode:  busybox       # busybox or systemd
+
+luks_enable:  false
+lvm_enable:   false
+btrfs_enable: false
+btrfs_multi_devices: false
+
+mkinitcpio_config: {}
+_mkinitcpio_config:
+  MODULES:       # []        # modules are loaded before any boot hooks
+    - "{{ 'btrfs' if btrfs_enable }}"
+  BINARIES: []
+    # This setting includes any additional binaries a given user may wish into the CPIO image
+    # This is run last, so it may be used to override the actual binaries included by a given hook
+    # BINARIES are dependency parsed, so you may safely ignore libraries
+  FILES:    []        # similar to BINARIES, however, files are added as-is and are not parsed. Useful for config files
+  HOOKS: "{{ hooks_busybox if initrd_mode == 'busybox' else hooks_systemd if initrd_mode == 'systemd' }}"
+  COMPRESSION: zstd         # algo used to compress/decompress the initramfs image
+    # zstd = versatile solution, with multi-threaded compression and a wide range of compression levels
+    # lz4  = fastest decompression speed but slower compression
+    # lzo  = > lz4 for compression
+    # cat  = uncompressed image
+    # gzip, bzip2, lzma, xz, lzo
+  COMPRESSION_OPTIONS: []   # additional options for the compressor
+
+mkinitcpio_force_create: false
+mkinitcpio_disable_fallback_preset: false

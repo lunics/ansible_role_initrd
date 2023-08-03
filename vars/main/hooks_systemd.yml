@@ -1,0 +1,14 @@
+hooks_systemd:
+  - base
+  - systemd
+  - keyboard
+  - autodetect
+  - modconf
+  # - kms
+  - block
+  # - mdadm_udev
+  - sd-vconsole
+  - "{{ 'sd-encrypt' if luks_enable }}"
+  - "{{ 'lvm2'       if lvm_enable  }}"
+  - filesystems
+  - fsck
