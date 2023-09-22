@@ -6,17 +6,12 @@ Inspired from [aisbergg](https://github.com/aisbergg/ansible-role-mkinitcpio).
 ## Usage
 Override [defaults](https://github.com/lunics/ansible_role_initrd/blob/main/defaults/main.yml) and see [vars](https://github.com/lunics/ansible_role_initrd/blob/main/vars/main/hooks_busybox.yml).
 
-### Example for a BTRFS root partition on LVM on LUKS.
-Enable one on these:
 ```yaml
-luks_enable:  true
-lvm_enable:   true
-btrfs_enable: true
-btrfs_multi_devices: false
-```
-Will be the same as declaring:
-```yaml
-mkinitcpio_config:
+mkinitcpio_config:      # is the same as below because it is automatically completed by default
+  MODULES:
+    - btrfs
+
+mkinitcpio_config:      # more explicit declaration
   MODULES:
     - btrfs
   HOOKS:
@@ -36,5 +31,3 @@ mkinitcpio_config:
     - filesystems
   COMPRESSION: zstd
 ```
-
-Inspired from [aisbergg](https://github.com/aisbergg/ansible-role-mkinitcpio).
