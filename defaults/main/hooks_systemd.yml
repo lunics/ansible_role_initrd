@@ -8,7 +8,7 @@ hooks_systemd:
   - block
   # - mdadm_udev
   - sd-vconsole
-  - "{{ 'sd-encrypt' if luks_enable }}"
-  - "{{ 'lvm2'       if lvm_enable  }}"
+  - sd-encrypt
+  - lvm2
   - filesystems
   - fsck

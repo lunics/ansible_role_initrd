@@ -1,0 +1,3 @@
+kernel:        linux
+initrd_mode:   busybox    # busybox or systemd
+initrd_reboot: false

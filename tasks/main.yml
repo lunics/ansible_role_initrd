@@ -8,7 +8,9 @@
       src:  mkinitcpio.conf
       dest: /etc/mkinitcpio.conf
       mode: "0644"
-    notify: "handlers | shell > generate initial RAM disk"
+    notify:
+      - "shell > generate initial RAM disk"
+      - "reboot > system to apply changes"
 
   - import_tasks: preset.yml
 

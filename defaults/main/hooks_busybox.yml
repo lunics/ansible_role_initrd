@@ -1,0 +1,20 @@
+hooks_busybox:
+  - base              # sets up all initial directories and installs base utilities and libraries
+  - udev              # starts the udev daemon and processes uevents
+  - keyboard          # enable wired and wireless keyboard before unlocking an encrypted device
+  # - btrfs             # only useful for btrfs on multiple devices, depends of btrfs-progs pkg
+  - autodetect
+  - modconf           # includes modprobe configuration files from /etc/modprobe.d/ and /usr/lib/modprobe.d/
+  # - kms             # adds GPU modules to provide early KMS start
+  - block             # adds all block device modules
+  # - net             # adds the modules for a network device, depends of mkinitcpio-nfs-utils pkg
+  # - dmraid          # support for fakeRAID root devices, depends of dmraid pkg, it is preferred to use mdadm
+  # - mdadm_udev      # support for assembling RAID arrays via udev, require mdadm pkg,
+  - keymap            # adds the specified keymap(s) from /etc/vconsole.conf to the initramfs
+  - consolefont       # adds the specified console font from /etc/vconsole.conf to the initramfs
+  - encrypt           # required to detect and unlock the encrypted root partition, must be placed before filesystems
+  - lvm2
+  - usr               # mounts /usr partition after the real root has been mounted, not compatible with snapper rollback
+  - resume            # mount swap partition, enable to resume from the "suspend to disk" state, must be after encrypt if swap is inside an encrypted partition
+  - filesystems
+  - fsck              # needed by /boot where pass=2, and by /usr if it is not a btrfs partition

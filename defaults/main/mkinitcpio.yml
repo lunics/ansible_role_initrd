@@ -1,14 +1,6 @@
-initrd_mode:  busybox       # busybox or systemd
-
-luks_enable:  false
-lvm_enable:   false
-btrfs_enable: false
-btrfs_multi_devices: false
-
 mkinitcpio_config: {}
 _mkinitcpio_config:
-  MODULES:       # []        # modules are loaded before any boot hooks
-    - "{{ 'btrfs' if btrfs_enable }}"
+  MODULES:  []                       # modules are loaded before any boot hooks
   BINARIES: []
     # This setting includes any additional binaries a given user may wish into the CPIO image
     # This is run last, so it may be used to override the actual binaries included by a given hook

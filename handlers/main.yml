@@ -1,6 +1,16 @@
-- name: handlers | shell > generate initial RAM disk
+- name: shell > generate initial RAM disk for {{ kernel }} kernel
   shell:
-    cmd: /usr/bin/mkinitcpio --preset linux
+    cmd: /usr/bin/mkinitcpio --preset {{ kernel }}
   register:     r_mkinitcpio
   failed_when:  r_mkinitcpio.rc != 0
   changed_when: true
+
+- name: reboot > system to apply changes
+  reboot:
+    msg:               "reboot initiated by ansible"
+    connect_timeout:   5
+    reboot_timeout:    300
+    pre_reboot_delay:  0
+    post_reboot_delay: 0
+    test_command:      uptime
+  when: initrd_reboot
