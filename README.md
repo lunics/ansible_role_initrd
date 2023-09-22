@@ -5,7 +5,7 @@ Generate the init RAM disk on Arch Linux.
 Inspired from [aisbergg](https://github.com/aisbergg/ansible-role-mkinitcpio).
 
 ## Usage
-Override [defaults](https://github.com/lunics/ansible_role_initrd/blob/main/defaults/main/mkinitcpio.yml) and [busybox hooks](https://github.com/lunics/ansible_role_initrd/blob/main/defaults/main/hooks_busybox.yml).
+Override [defaults](https://github.com/lunics/ansible_role_initrd/blob/main/defaults/main/mkinitcpio.yml) and see [busybox hooks](https://github.com/lunics/ansible_role_initrd/blob/main/defaults/main/hooks_busybox.yml).
 
 ```yaml
 mkinitcpio_config:      # is the same as below because it is automatically completed by default
