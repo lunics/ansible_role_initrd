@@ -1,6 +1,7 @@
 # Ansible role: INITRD
 
 Generate the init RAM disk on Arch Linux.
+
 Inspired from [aisbergg](https://github.com/aisbergg/ansible-role-mkinitcpio).
 
 ## Usage
