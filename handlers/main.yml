@@ -1,4 +1,4 @@
-- name: shell > generate initial RAM disk for {{ kernel }} kernel
+- name: shell > generate initial RAM disk
   shell:
     cmd: /usr/bin/mkinitcpio --preset {{ kernel }}
   register:     r_mkinitcpio
