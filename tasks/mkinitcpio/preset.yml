@@ -1,11 +1,11 @@
 - block:
-  - name: present | find > all /etc/mkinitcpio.d/*.preset files
+  - name: mkinitcpio | find > all /etc/mkinitcpio.d/*.preset files
     find:
       paths:    /etc/mkinitcpio.d/
       patterns: "*.preset"
     register: r_preset_files
 
-  - name: preset | lineinfile > disable fallback preset
+  - name: mkinitcpio | lineinfile > disable fallback preset
     lineinfile:
       path:   "{{ item.path }}"
       regexp: "^PRESETS="

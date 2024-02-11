@@ -1,0 +1,29 @@
+- block:
+  - name: mkinitcpio | set_fact > combine default and custom mkinitcpio config
+    set_fact:
+      mkinitcpio_combined: "{{ _mkinitcpio_config | combine(mkinitcpio_config) }}"
+
+  - name: mkinitcpio | template > generate mkinitcpio config
+    template:
+      src:  mkinitcpio.conf
+      dest: /etc/mkinitcpio.conf
+      mode: "0644"
+    notify:
+      - "shell > generate initial RAM disk"
+      - "reboot > system to apply changes"
+
+  - import_tasks: mkinitcpio/preset.yml
+
+  - name: mkinitcpio | meta > run handlers before modifying initramfs.img permissions
+    meta: flush_handlers
+
+  ## KO: can't be apply
+  # - name: file > restrict access permissions to initramfs
+  #   file:
+  #     path: "/boot/{{ item }}"
+  #     mode: "0600"
+  #   with_items:
+  #     - initramfs-linux.img
+  #     - initramfs-linux-fallback.img
+
+  tags: mkinitcpio
